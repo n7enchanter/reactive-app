@@ -1,0 +1,13 @@
+
+<div>
+    <mat-select #mySelect (click)="getUsers()" formControlName="selected" placeholder="User">
+        <mat-option  (click)="createRoom(user)" *ngFor="let user of users" [value]="user">{{user}}</mat-option>
+    </mat-select>
+</div>
+<div>
+    <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+        <div *ngFor="let room of rooms" (click)="getMessages(room.id)" class="example-item">
+                {{room.contributor}}
+        </div>
+    </cdk-virtual-scroll-viewport>
+</div>

@@ -1,0 +1,11 @@
+<div *ngIf="this.localStorageItem('Authentication')!==null">
+  <button (click)="logout()">Logout</button>
+</div>
+
+<div *ngIf="this.localStorageItem('Authentication')===null" style="top: auto;">
+  <app-authentication ></app-authentication>
+</div>
+<div *ngIf="this.localStorageItem('Authentication')!==null">
+  <app-messages></app-messages>
+</div>
+<router-outlet></router-outlet>

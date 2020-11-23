@@ -1,0 +1,26 @@
+<div  style="display: inline-block;width: 30%;">
+    <app-rooms (ClickEvent)="getMessages($event)"></app-rooms>
+</div>
+<div style="display: inline-block;width: 70%;position: fixed;">
+    <div class="form-page">
+        <div>
+            <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+                <div *ngFor="let message of messages" class="example-item">
+                    {{message.sender}}  {{message.message}}
+                </div>
+            </cdk-virtual-scroll-viewport>
+        </div>
+    </div>
+    <div>
+        <mat-form-field   class="inp_back">
+            <input
+              matInput
+              [(ngModel)]="message"
+              (keydown.enter)="sendMessage()"
+              placeholder="Message"
+               required>
+          </mat-form-field>
+    </div>
+</div>
+
+

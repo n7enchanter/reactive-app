@@ -1,0 +1,14 @@
+<form [formGroup]="authenticationService.form">
+    <mat-form-field>
+        <input matInput formControlName="username"  placeholder="Login">
+        <mat-error>This field is mandatory.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="password"  placeholder="Password">
+        <mat-error>This field is mandatory.</mat-error>
+    </mat-form-field>
+    <div>
+        <button  mat-raised-button color="primary" type="submit" (click)="login()">SignIn</button>
+        <button mat-raised-button color="warn" type="submit" (click)="register()">SignUp</button>
+    </div>
+</form>
