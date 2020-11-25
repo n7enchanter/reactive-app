@@ -9,7 +9,7 @@ import { User } from '../model/User';
   providedIn: 'root'
 })
 export class RoomsService {
-
+  eventSource:EventSourcePolyfill;
   constructor(private _http: HttpClient) {}
   url: String = 'http://localhost:8080/';
   getUsers(): Observable<String> {
@@ -41,7 +41,6 @@ export class RoomsService {
     });
   }
   getRooms(): Observable<Room> {
-    debugger;
     return new Observable<Room>((observer) => {
       let url = this.url+'getRooms';
       let eventSource = new EventSourcePolyfill(url,{
@@ -51,7 +50,7 @@ export class RoomsService {
       eventSource.onmessage = (event) => {
         console.debug('Received event: ', event);
         let json = JSON.parse(event.data);
-        observer.next(new Room(json['id'],json['contributors'],json['privatChat']));
+        observer.next(new Room(json['roomId'],json['contributors'],json['privatChat'],json['roomName']));
       };
       eventSource.onerror = (error) => {
         // readyState === 0 (closed) means the remote source closed the connection,
@@ -65,13 +64,22 @@ export class RoomsService {
         } else {
           observer.error('EventSource error: ' + error);
         }
+        this.getRooms()
       }
     });
   }
 
   createRoom(user: User){
-    debugger;
     return this._http.post(this.url+'createRoom',user);
+  }
+
+  setRoomName(roomDetails:Room){
+    return this._http.post(this.url+'setRoomName',roomDetails);
+  }
+  closeEvent(){
+    if(this.eventSource){
+      this.eventSource.close();
+    }
   }
 
 }

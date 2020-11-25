@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSelect } from '@angular/material/select';
-import { Observable } from 'rxjs';
+import { Observable, interval } from 'rxjs';
 import { RoomsService } from './rooms.service';
 import {Chat,Room} from '../model/room'
 import { User } from '../model/User';
@@ -23,19 +23,20 @@ export class RoomsComponent implements OnInit {
     this.getRooms();
   }
 
-  getMessages(roomId:string){
+
+  getMessageStream(roomId:string){
+    debugger;
     this.ClickEvent.emit(roomId);
   }
 
   getUsers(): void {
-    debugger;
     this.users = [];
-    let quoteObservable: Observable<String>;
-    quoteObservable = this.roomsService.getUsers();
     
-    quoteObservable.subscribe(user => {
-      this.users.push(user);
-      this.cdr.detectChanges();
+    this.roomsService.getUsers().subscribe(user => {
+      if(user.toString()!== atob(localStorage.getItem('Authentication').split(' ')[1]).split(':')[0]){
+        this.users.push(user);
+        this.cdr.detectChanges();
+      }
     });
   }
 
@@ -49,21 +50,31 @@ export class RoomsComponent implements OnInit {
       });
     }
     if(!exists){
-      debugger;
       this.newUser = new User(user,"null")
       this.roomsService.createRoom(this.newUser).subscribe();
     }
   }
+   source = interval(80000).subscribe(x =>{
+      this.getRooms();
+   })
+
   getRooms():void{
-    debugger;
+    this.roomsService.closeEvent();
     let quoteObservable: Observable<Room>;
     quoteObservable = this.roomsService.getRooms();
     
     quoteObservable.subscribe(room => {
+      if(this.rooms.indexOf)
       if(room.privateChat === 'false'){
-        this.rooms.push(new Chat(room.id,'Public Chat',room.privateChat))
+        let chat = new Chat(room.roomId,'Public Chat',room.privateChat,'Public Chat');
+        if(!this.rooms.find(c => chat.contributor === c.contributor)){
+          this.rooms.push(chat)
+        }
       } else {
-        this.rooms.push(new Chat(room.id,room.contributors[0].replace('"','').replace('"',''),room.privateChat));
+        let chat = new Chat(room.roomId,room.contributors[0],room.privateChat,room.roomName);
+        if(!this.rooms.find(c => chat.contributor === c.contributor)){
+          this.rooms.push(chat)
+        }
       }
       this.cdr.detectChanges();
       // this.cdr.detectChanges();

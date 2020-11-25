@@ -10,7 +10,6 @@ export class BasicAuthInterceptorService implements HttpInterceptor{
   constructor() { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add authorization header with basic auth credentials if available
-    debugger;
     if(request.url!==this.url+'login' && request.url!==this.url+'register'){
       request = request.clone({
         setHeaders: { 

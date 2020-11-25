@@ -17,7 +17,6 @@ export class MessagesComponent implements OnInit {
   ngOnInit(): void {
   }
   getMessages(roomId:string){
-    debugger;
     this.messageService.closeEvent();
     this.messages = [];
     this.roomId = roomId;

@@ -16,7 +16,6 @@ export class AuthenticationComponent implements OnInit {
   }
 
   login(){
-    debugger;
     this.user = new User(this.authenticationService.form.value.username,this.authenticationService.form.value.password);
     this.authenticationService.login(this.user).subscribe(username => {
       if(username['username']!==null){
@@ -25,7 +24,6 @@ export class AuthenticationComponent implements OnInit {
     });
   }
   register(){
-    debugger;
     this.user = new User(this.authenticationService.form.value.username,this.authenticationService.form.value.password);
     this.authenticationService.register(this.user).pipe().subscribe(newUser => {
       if(newUser['username'] === null){

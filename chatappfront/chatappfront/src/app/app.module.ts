@@ -16,6 +16,9 @@ import { AuthenticationService } from './authentication/authentication.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { RoomDetailsComponent } from './room-details/room-details.component';
+import {MatIconModule} from '@angular/material/icon'
+import {MatToolbarModule} from '@angular/material/toolbar'
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import {MatInputModule} from '@angular/material/input';
     MessagesComponent,
     RoomsComponent,
     AuthenticationComponent,
+    RoomDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,9 @@ import {MatInputModule} from '@angular/material/input';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true },AuthenticationService],
   bootstrap: [AppComponent]

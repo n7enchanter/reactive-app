@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono;
 import java.security.Principal;
 
 @RestController
-@CrossOrigin(value = { "http://localhost:4200" })
+@CrossOrigin
 public class UserRestController {
     @Autowired
     IUserDao userRepository;

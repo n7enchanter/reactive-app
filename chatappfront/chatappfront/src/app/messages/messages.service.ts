@@ -12,7 +12,6 @@ export class MessagesService {
   constructor(private _http:HttpClient) { }
   url: String = 'http://localhost:8080/';
   getMessages(roomId:string): Observable<Message> {
-    debugger;
     return new Observable<Message>((observer) => {
       let url = this.url+'getMessages/'+roomId;
       this.eventSource = new EventSourcePolyfill(url,{
