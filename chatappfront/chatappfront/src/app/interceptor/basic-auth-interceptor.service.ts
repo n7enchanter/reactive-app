@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BasicAuthInterceptorService implements HttpInterceptor{
-  url: String = 'http://localhost:8080/';
+  url: String = 'http://ec2-35-173-245-87.compute-1.amazonaws.com:8080/';
   constructor() { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add authorization header with basic auth credentials if available

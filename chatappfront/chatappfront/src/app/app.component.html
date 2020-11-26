@@ -6,7 +6,7 @@
     <button (click)="logout()">Logout</button>
   </div>
   <div *ngIf="this.localStorageItem('Authentication')===null" style="top: auto;">
-    <app-authentication ></app-authentication>
+    <app-authentication (UserNameEmiter)="setUserName($event)"></app-authentication>
   </div>
 </mat-toolbar>
 <div *ngIf="this.localStorageItem('Authentication')!==null">

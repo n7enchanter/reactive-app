@@ -5,21 +5,15 @@ import com.n7enchanter.chatapp.repository.IUserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.security.Principal;
-
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserRestController {
     @Autowired
     IUserDao userRepository;
@@ -45,7 +39,7 @@ public class UserRestController {
                 userRepository.save(newUser).subscribe();
                 return userDetails;
             }
-            return new User();
+            return userDetails;
         });
     }
 

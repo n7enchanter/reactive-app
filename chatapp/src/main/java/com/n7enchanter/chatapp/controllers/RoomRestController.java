@@ -6,21 +6,16 @@ import com.n7enchanter.chatapp.repository.IRoomDao;
 import com.n7enchanter.chatapp.repository.IRoomDetailsDao;
 import com.n7enchanter.chatapp.repository.IUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RoomRestController {
     @Autowired
     IUserDao userDao;

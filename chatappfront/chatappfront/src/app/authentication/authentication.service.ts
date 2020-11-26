@@ -8,7 +8,7 @@ import { User } from '../model/User';
 })
 export class AuthenticationService {
 
-  url: String = 'http://localhost:8080/';
+  url: String = 'http://ec2-35-173-245-87.compute-1.amazonaws.com:8080/';
   constructor(private _http: HttpClient) { }
   form: FormGroup = new FormGroup({
     username: new FormControl(),

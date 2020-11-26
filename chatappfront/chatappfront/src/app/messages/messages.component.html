@@ -31,14 +31,12 @@
                             </cdk-virtual-scroll-viewport>
                         </div>
                     </div>
-                    <div>
-                        <mat-form-field   class="inp_back">
-                            <input
-                              matInput
-                              [(ngModel)]="message"
-                              (keydown.enter)="sendMessage()"
-                              placeholder="Message"
-                               required width="100%">
+                    <div *ngIf="!!roomId" style="width: 70%;">
+                        <mat-form-field  style="width: 100%;">
+                            <input matInput [formControl]="messageControl" [(ngModel)]="message"
+                            (keydown.enter)="sendMessage()"
+                            placeholder="Message"
+                             required width="100%">
                           </mat-form-field>
                     </div>
                 </div>

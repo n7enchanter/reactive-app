@@ -11,7 +11,7 @@ import { User } from '../model/User';
 export class RoomsService {
   eventSource:EventSourcePolyfill;
   constructor(private _http: HttpClient) {}
-  url: String = 'http://localhost:8080/';
+  url: String = 'http://ec2-35-173-245-87.compute-1.amazonaws.com:8080/';
   getUsers(): Observable<String> {
     return new Observable<String>((observer) => {
       let url = this.url+'getUsers';

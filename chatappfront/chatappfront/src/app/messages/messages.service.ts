@@ -10,7 +10,7 @@ import { Message } from '../model/Message';
 export class MessagesService {
   eventSource:EventSourcePolyfill;
   constructor(private _http:HttpClient) { }
-  url: String = 'http://localhost:8080/';
+  url: String = 'http://ec2-35-173-245-87.compute-1.amazonaws.com:8080/';
   getMessages(roomId:string): Observable<Message> {
     return new Observable<Message>((observer) => {
       let url = this.url+'getMessages/'+roomId;

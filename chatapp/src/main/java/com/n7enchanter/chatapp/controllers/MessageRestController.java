@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
 import java.security.Principal;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MessageRestController {
     @Autowired
     IMessageDao messageDao;

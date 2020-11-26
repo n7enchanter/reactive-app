@@ -24,7 +24,6 @@ export class RoomsComponent implements OnInit {
 
 
   getMessageStream(rD:Room){
-    debugger;
     this.ClickEvent.emit(rD);
     this.selected = rD.roomName;
   }

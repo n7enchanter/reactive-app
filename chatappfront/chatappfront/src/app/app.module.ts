@@ -19,6 +19,7 @@ import {MatInputModule} from '@angular/material/input';
 import { RoomDetailsComponent } from './room-details/room-details.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSnackBarModule} from '@angular/material/snack-bar'
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatInputModule,
     MatIconModule,
     MatToolbarModule,
+    MatSnackBarModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true },AuthenticationService],
   bootstrap: [AppComponent]

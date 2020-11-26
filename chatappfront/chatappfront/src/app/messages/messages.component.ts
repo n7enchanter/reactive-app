@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { Message } from '../model/Message'
 import { Room } from '../model/room';
@@ -14,9 +15,13 @@ export class MessagesComponent implements OnInit, AfterViewInit {
   @ViewChildren('item') itemElements: QueryList<any>;
   userName:string = atob(localStorage.getItem('Authentication').split(' ')[1]).split(':')[0];
   messages: Message[] = [];
+  messageControl = new FormControl('', [
+    Validators.required
+  ]);
   message: string;
   roomId: string;
   roomName: string;
+  errorMsg: string;
   scrollContainer: any;
   isNearBottom: boolean = true;
   constructor(private messageService: MessagesService, private cdr: ChangeDetectorRef, private authenticationService: AuthenticationService) { }
@@ -24,7 +29,16 @@ export class MessagesComponent implements OnInit, AfterViewInit {
 
     this.scrollContainer = this.scrollFrame.nativeElement;
     this.scrollToBottom();
+    this.sleep(5000);
     this.itemElements.changes.subscribe(a => this.onItemElementsChanged());
+  }
+
+  sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
   }
 
   ngOnInit(): void {
@@ -68,9 +82,12 @@ export class MessagesComponent implements OnInit, AfterViewInit {
 
   }
   sendMessage() {
-    let username = atob(localStorage.getItem('Authentication').split(' ')[1]).split(':')[0];
-    this.messageService.postMessage(new Message(username, this.message, this.roomId)).subscribe();
-    this.message = '';
+    debugger
+    let username = atob(localStorage.getItem('Authentication').split(' ')[1]).split(':')[0]; 
+    if(this.message!==''){
+      this.messageService.postMessage(new Message(username, this.message, this.roomId)).subscribe();
+      this.message = '';
+    }
   }
 
 }
