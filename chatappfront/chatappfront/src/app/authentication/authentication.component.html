@@ -1,5 +1,5 @@
-<form [formGroup]="authenticationService.form">
-    <mat-form-field>
+<form style="display: flex;" [formGroup]="authenticationService.form">
+    <mat-form-field style="margin-right: 10px;">
         <input matInput formControlName="username"  placeholder="Login">
         <mat-error>This field is mandatory.</mat-error>
     </mat-form-field>
@@ -7,8 +7,9 @@
         <input matInput formControlName="password"  placeholder="Password">
         <mat-error>This field is mandatory.</mat-error>
     </mat-form-field>
-    <div>
+    <div style="margin-top: 25px;
+    margin-left: 20px;">
         <button  mat-raised-button color="primary" type="submit" (click)="login()">SignIn</button>
-        <button mat-raised-button color="warn" type="submit" (click)="register()">SignUp</button>
+        <button style="margin-left: 10px;" mat-raised-button color="warn" type="submit" (click)="register()">SignUp</button>
     </div>
 </form>

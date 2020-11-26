@@ -1,23 +1,14 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My App</span>
+  <span>Reactive Chat</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
+  <span *ngIf="this.localStorageItem('Authentication')!==null" style="margin-right: 10px;">Hello {{userName}}</span>
+  <div *ngIf="this.localStorageItem('Authentication')!==null">
+    <button (click)="logout()">Logout</button>
+  </div>
+  <div *ngIf="this.localStorageItem('Authentication')===null" style="top: auto;">
+    <app-authentication ></app-authentication>
+  </div>
 </mat-toolbar>
-<div *ngIf="this.localStorageItem('Authentication')!==null">
-  <button (click)="logout()">Logout</button>
-</div>
-
-<div *ngIf="this.localStorageItem('Authentication')===null" style="top: auto;">
-  <app-authentication ></app-authentication>
-</div>
 <div *ngIf="this.localStorageItem('Authentication')!==null">
   <app-messages></app-messages>
 </div>

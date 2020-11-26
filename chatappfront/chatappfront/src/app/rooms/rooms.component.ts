@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
 import { MatSelect } from '@angular/material/select';
 import { Observable, interval } from 'rxjs';
 import { RoomsService } from './rooms.service';
@@ -16,17 +16,17 @@ export class RoomsComponent implements OnInit {
   users: String[] = [];
   newUser: User;
   @Output() ClickEvent = new EventEmitter();
-  @ViewChild('mySelect') mySelect:MatSelect;  
-  selected : String;
+  selected : string;
   ngOnInit(): void {
     this.getUsers();
     this.getRooms();
   }
 
 
-  getMessageStream(roomId:string){
+  getMessageStream(rD:Room){
     debugger;
-    this.ClickEvent.emit(roomId);
+    this.ClickEvent.emit(rD);
+    this.selected = rD.roomName;
   }
 
   getUsers(): void {
